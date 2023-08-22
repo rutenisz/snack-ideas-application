@@ -1,0 +1,69 @@
+body {
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  height: 70px;
+  background-color: rgb(182, 109, 178);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.logo {
+  font-size: 2rem;
+  color: azure;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav li a {
+  font-size: 1rem;
+  color: azure;
+  text-decoration: none;
+}
+
+.snacks-wrapper {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.recipe-wrapper {
+  width: 250px;
+  height: 300px;
+  margin: auto;
+  background-color: rgb(210, 154, 207);
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.recipe-form button {
+  padding: 0.5rem;
+  background-color: rgb(143, 52, 139);
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}

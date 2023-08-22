@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div>
+      <header>
+        <div class="logo">Snack ideas</div>
+        <ul class="nav">
+          <li><a href="#">All ideas</a></li>
+          <li><a href="./addRecipe.html">Insert an idea</a></li>
+        </ul>
+      </header>
+
+      <div class="recipe-form">
+        <input type="text" placeholder="Title" id="recipe-title" />
+        <input type="text" placeholder="Description" id="recipe-description" />
+        <input type="text" placeholdere="Flavor" id="recipe-flavor" />
+        <input type="text" placeholder="Ingredients" id="recipe-ingredients" />
+        <input type="text" placeholder="Recipe instructions" id="recipe-instructions" />
+        <input type="number" placeholder="Calories" id="recipe-calories" />
+        <input type="text" placeholder="Image" id="recipe-image" />
+        <button id="recipe-btn">Add snack</button>
+      </div>
+
+      <div class="response-message" id="response-message"></div>
+    </div>
+    <script src="./addRecipe.js"></script>
+  </body>
+</html>
