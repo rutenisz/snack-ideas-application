@@ -7,8 +7,12 @@ const getallSnacks = async () => {
   const snack = await response.json();
   console.log("dsad");
   snack.forEach((recipe) => {
-    const wrapper = document.createElement("div");
+    const wrapper = document.createElement("a");
     wrapper.setAttribute("class", "recipe-wrapper");
+    wrapper.href = "./recipe.html";
+    wrapper.addEventListener("click", () => {
+      localStorage.setItem("recipeId", recipe.id);
+    });
 
     const title = document.createElement("h1");
     title.innerHTML = recipe.title;
