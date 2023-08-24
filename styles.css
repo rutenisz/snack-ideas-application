@@ -43,6 +43,8 @@ header {
   background-color: rgb(210, 154, 207);
   padding: 1.5rem;
   border-radius: 10px;
+  text-decoration: none;
+  color: rgb(161, 54, 54);
 }
 
 .recipe-image {

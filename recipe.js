@@ -1,5 +1,9 @@
-const recipeId = localStorage.getItem("recipeId");
+const RECIPES_URL = "https://64e3bab0bac46e480e79229a.mockapi.io/snacks/";
+
 const deleteBtn = document.getElementById("delete-btn");
+
+const url = new URL(window.location.href); // leidzia issitraukti parametrus is url
+const recipeId = url.searchParams.get("recipeId");
 
 const addRecipeToScreen = (recipe) => {
   const title = document.getElementById("title");
@@ -25,40 +29,58 @@ const addRecipeToScreen = (recipe) => {
   img.src = recipe.imgUrl;
 };
 
-const getRecipe = async () => {
-  const response = await fetch(
-    "https://64e3bab0bac46e480e79229a.mockapi.io/snacks/" + recipeId
-  );
-
-  const recipe = await response.json();
-
-  addRecipeToScreen(recipe);
-};
-
-getRecipe();
-
-deleteBtn.addEventListener("click", async () => {
+const getRecipe = async () => { // parsifetchina recepta
   try {
-    const response = await fetch(
-      "https://64e3bab0bac46e480e79229a.mockapi.io/snacks/" + recipeId,
-      {
-        method: "DELETE",
-      }
-    );
-
-    const data = await response.json();
-
-    if (data) {
-      const infoMessage = document.getElementById("info-msg");
-      infoMessage.innerHTML = "Snack was deleted.";
-
-      setTimeout(() => {
-        window.location.replace("./index.html");
-      }, 3000);
-    }
+    const response = await fetch(RECIPES_URL + recipeId);
+    const recipe = await response.json();
+    return recipe;
   } catch (err) {
     console.log(err);
-    const infoMessage = document.getElementById("info-msg");
+    return false;
+  }
+};
+
+const deleteRecipe = async () => {
+  try {
+    const response = await fetch(RECIPES_URL + recipeId, {
+      method: "DELETE",
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return false;
+  }
+};
+
+const oneRecipeDeleted = (data) => {
+  const infoMessage = document.getElementById("info-msg");
+  if (data) {
+    infoMessage.innerHTML = "Snack was deleted.";
+
+    setTimeout(() => {
+      window.location.replace("./index.html");
+    }, 3000);
+  } else {
     infoMessage.innerHTML = "An error occured, snack wasn't deleted.";
   }
-});
+};
+
+const onClickDeleteBtn = async () => {
+  try {
+    const response = await deleteRecipe();
+    oneRecipeDeleted(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+deleteBtn.addEventListener("click", onClickDeleteBtn);
+
+const displayRecipe = async () => {
+  const recipe = await getRecipe();
+  recipe && addRecipeToScreen(recipe);
+};
+
+displayRecipe();
+console.log("fwedf");

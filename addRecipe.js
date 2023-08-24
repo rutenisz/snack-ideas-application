@@ -1,9 +1,9 @@
 const recipeFormBtn = document.getElementById("recipe-btn");
 
-recipeFormBtn.addEventListener("click", async () => {
+const getRecipeObject = () => {
   const recipeTitle = document.getElementById("recipe-title").value;
   const recipeDescription = document.getElementById("recipe-description").value;
-  const recipeFlavor = document.getElementById("recipeFlavor").value;
+  const recipeFlavor = document.getElementById("recipe-flavor").value;
   const recipeIngredients = document.getElementById("recipe-ingredients").value;
   const recipeInstructions = document.getElementById(
     "recipe-instructions"
@@ -21,6 +21,10 @@ recipeFormBtn.addEventListener("click", async () => {
     img: recipeImage,
   };
 
+  return recipe;
+};
+
+const insertRecipe = async (recipe) => {
   try {
     const response = await fetch(
       "https://64e3bab0bac46e480e79229a.mockapi.io/snacks",
@@ -33,19 +37,30 @@ recipeFormBtn.addEventListener("click", async () => {
         body: JSON.stringify(recipe),
       }
     );
+    console.log("dsad");
     const data = await response.json();
-
-    if (data) {
-      const messageWrapper = document.getElementById("response-message");
-      messageWrapper.innerHTML = "Idea was inserted";
-
-      setTimeout(() => {
-        window.location.replace("./index.html");
-      }, 3000);
-    }
+    return data;
   } catch (err) {
+    return false;
+  }
+};
+
+const oneRecipeInserted = (data) => {
+  const messageWrapper = document.getElementById("response-message");
+  if (data) {
+    messageWrapper.innerHTML = "Idea was inserted";
+
+    setTimeout(() => {
+      window.location.replace("./index.html");
+    }, 3000);
+  } else {
     console.log("err", err);
-    const messageWrapper = document.getElementById("response-message");
     messageWrapper.innerHTML = "An error occured, idea was not inserted.";
   }
+};
+
+recipeFormBtn.addEventListener("click", async () => {
+  const recipe = getRecipeObject();
+  const data = await insertRecipe(recipe);
+  oneRecipeInserted(data);
 });
