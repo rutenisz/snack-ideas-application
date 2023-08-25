@@ -1,3 +1,5 @@
+import { validateInputForm } from "./src/validation.js";
+
 const recipeFormBtn = document.getElementById("recipe-btn");
 
 const getRecipeObject = () => {
@@ -10,6 +12,16 @@ const getRecipeObject = () => {
   ).value;
   const recipeCalories = document.getElementById("recipe-calories").value;
   const recipeImage = document.getElementById("recipe-image");
+
+  validateInputForm(
+    recipeTitle,
+    recipeDescription,
+    recipeFlavor,
+    recipeIngredients,
+    recipeInstructions,
+    recipeCalories,
+    recipeImage
+  );
 
   const recipe = {
     title: recipeTitle,
